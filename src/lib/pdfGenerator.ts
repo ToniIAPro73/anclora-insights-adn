@@ -39,7 +39,7 @@ const colors = {
 };
 
 const VERSION = "v3.0";
-const EDITION = "Edicion 2026";
+const EDITION = "Edición 2026";
 
 type Pdf = jsPDF;
 type Rgb = readonly [number, number, number];
@@ -66,30 +66,30 @@ const pdfFonts = [
 const dnaBlocks = [
   {
     numeral: "I",
-    title: "Proposito",
-    text: "Transformar complejidad en criterio. Anclora Insights no compite por volumen ni velocidad: filtra, ordena y presenta conocimiento con la profundidad suficiente para que conserve su valor mucho despues del primer impacto."
+    title: "Propósito",
+    text: "Transformar complejidad en criterio. Anclora Insights no compite por volumen ni velocidad: filtra, ordena y presenta conocimiento con la profundidad suficiente para que conserve su valor mucho después del primer impacto."
   },
   {
     numeral: "II",
     title: "Promesa",
-    text: "Ahorrar tiempo cognitivo al lector exigente. Cada pieza separa la senal del ruido, reduce la friccion interpretativa y entrega una sintesis util, elegante y verificable que respeta la inteligencia de quien lee."
+    text: "Ahorrar tiempo cognitivo al lector exigente. Cada pieza separa la señal del ruido, reduce la fricción interpretativa y entrega una síntesis útil, elegante y verificable que respeta la inteligencia de quien lee."
   },
   {
     numeral: "III",
     title: "Territorio",
-    text: "Curaduria editorial, analisis estrategico, economia del conocimiento y desarrollo intelectual aplicado. La marca evita la urgencia artificial y privilegia la permanencia sobre la novedad efimera."
+    text: "Curaduría editorial, análisis estratégico, economía del conocimiento y desarrollo intelectual aplicado. La marca evita la urgencia artificial y privilegia la permanencia sobre la novedad efímera."
   },
   {
     numeral: "IV",
     title: "Tono",
-    text: "Autoridad serena, claridad conceptual y calidez contenida. La voz suena precisa, humana y madura; nunca publicitaria, nunca grandilocuente, siempre al servicio de la comprension."
+    text: "Autoridad serena, claridad conceptual y calidez contenida. La voz suena precisa, humana y madura; nunca publicitaria, nunca grandilocuente, siempre al servicio de la comprensión."
   }
 ];
 
 const voicePrinciples = [
   {
-    title: "Precision antes que brillantez",
-    text: "Cada afirmacion debe poder sostenerse. Si una frase no aporta criterio, se elimina."
+    title: "Precisión antes que brillantez",
+    text: "Cada afirmación debe poder sostenerse. Si una frase no aporta criterio, se elimina."
   },
   {
     title: "Calma estructural",
@@ -103,12 +103,12 @@ const voicePrinciples = [
 
 const voiceContrast = {
   yes: [
-    "«La evidencia sugiere una conclusion incomoda: menos contenido, mejor seleccionado, rinde mas.»",
-    "«Tres ideas bastan. El resto es decoracion.»"
+    "«La evidencia sugiere una conclusión incómoda: menos contenido, mejor seleccionado, rinde más.»",
+    "«Tres ideas bastan. El resto es decoración.»"
   ],
   no: [
-    "«¡Descubre los 10 secretos que revolucionaran tu productividad hoy mismo!»",
-    "«Somos lideres disruptivos en soluciones de knowledge management de vanguardia.»"
+    "«¡Descubre los 10 secretos que revolucionarán tu productividad hoy mismo!»",
+    "«Somos líderes disruptivos en soluciones de knowledge management de vanguardia.»"
   ]
 };
 
@@ -130,12 +130,12 @@ const palette = [
     usage: "Base editorial clara y descansada. Sostiene la lectura prolongada sin fatiga visual."
   },
   {
-    name: "Oro Metalico",
+    name: "Oro Metálico",
     hex: "#F59E0B",
     rgb: "245 · 158 · 11",
     share: "10 %",
-    role: "Color de jerarquia",
-    usage: "Sellos, lineas de honor, llamadas y microdetalles. Marca lo que merece ser mirado dos veces."
+    role: "Color de jerarquía",
+    usage: "Sellos, líneas de honor, llamadas y microdetalles. Marca lo que merece ser mirado dos veces."
   },
   {
     name: "Oro Mitigado",
@@ -143,42 +143,42 @@ const palette = [
     rgb: "217 · 119 · 6",
     share: "5 %",
     role: "Color de apoyo",
-    usage: "Enfasis secundarios y estados de apoyo. Nunca sustituye al Oro Metalico en piezas de honor."
+    usage: "Énfasis secundarios y estados de apoyo. Nunca sustituye al Oro Metálico en piezas de honor."
   }
 ] as const;
 
 const typeScale = [
   { use: "Titular editorial", family: "Libre Baskerville Bold", size: "28 / 34 pt", sample: "El criterio permanece" },
-  { use: "Subtitulo", family: "Libre Baskerville Italic", size: "15 / 22 pt", sample: "Una lectura que se queda" },
+  { use: "Subtítulo", family: "Libre Baskerville Italic", size: "15 / 22 pt", sample: "Una lectura que se queda" },
   { use: "Cuerpo", family: "Inter Regular", size: "10 / 16 pt", sample: "La claridad es una forma de respeto hacia quien dedica su tiempo a leer." },
-  { use: "Enfasis", family: "Inter SemiBold", size: "10 / 16 pt", sample: "Senal, no ruido." },
-  { use: "Epigrafe", family: "Inter Bold · caps", size: "7.5 / 12 pt", sample: "MANUAL DE IDENTIDAD" }
+  { use: "Énfasis", family: "Inter SemiBold", size: "10 / 16 pt", sample: "Señal, no ruido." },
+  { use: "Epígrafe", family: "Inter Bold · caps", size: "7.5 / 12 pt", sample: "MANUAL DE IDENTIDAD" }
 ] as const;
 
 const usageRules = [
   {
     title: "Espacio que respira",
-    text: "Margenes generosos y constantes. El vacio no es ausencia: es el marco que da valor a cada elemento."
+    text: "Márgenes generosos y constantes. El vacío no es ausencia: es el marco que da valor a cada elemento."
   },
   {
     title: "Oro con criterio",
-    text: "El oro se reserva para jerarquia real. Usado como relleno decorativo, deja de significar."
+    text: "El oro se reserva para jerarquía real. Usado como relleno decorativo, deja de significar."
   },
   {
     title: "Contraste siempre",
-    text: "Tinta sobre papel, papel sobre tinta. Nunca texto sobre fondos con ruido ni fotografias sin veladura."
+    text: "Tinta sobre papel, papel sobre tinta. Nunca texto sobre fondos con ruido ni fotografías sin veladura."
   },
   {
     title: "La medalla, intacta",
-    text: "No deformar, rotar, recortar ni rasterizar a baja resolucion la medalla o el lockup. Proporciones originales, siempre."
+    text: "No deformar, rotar, recortar ni rasterizar a baja resolución la medalla o el lockup. Proporciones originales, siempre."
   },
   {
-    title: "Pareja tipografica fija",
+    title: "Pareja tipográfica fija",
     text: "Titulares en Libre Baskerville, cuerpo en Inter. No se introducen terceras familias."
   },
   {
     title: "Menos, mejor",
-    text: "Si una pieza funciona con tres elementos, no lleva cuatro. La edicion es la ultima capa de diseno."
+    text: "Si una pieza funciona con tres elementos, no lleva cuatro. La edición es la última capa de diseño."
   }
 ];
 
@@ -199,7 +199,7 @@ async function toDataUrl(url: string) {
 
 async function toBinaryString(url: string) {
   const response = await fetch(url);
-  if (!response.ok) throw new Error(`No se pudo cargar la tipografia del PDF: ${url}`);
+  if (!response.ok) throw new Error(`No se pudo cargar la tipografía del PDF: ${url}`);
 
   const bytes = new Uint8Array(await response.arrayBuffer());
   let binary = "";
@@ -403,7 +403,7 @@ function pageCover(doc: Pdf, hero: string, medal: string) {
   sans(doc, "semibold");
   doc.setFontSize(7);
   textColor(doc, colors.slateLight);
-  doc.text(`Formato A4 · 210 x 297 mm · Tipografia embebida · ${VERSION}`, M, PAGE_H - 27);
+  doc.text(`Formato A4 · 210 x 297 mm · Tipografía embebida · ${VERSION}`, M, PAGE_H - 27);
   textColor(doc, colors.gold);
   doc.text("ANCLORA GROUP", PAGE_W - M, PAGE_H - 27, { align: "right" });
 }
@@ -411,12 +411,12 @@ function pageCover(doc: Pdf, hero: string, medal: string) {
 /* -- 02 · Colofon e indice ------------------------------------- */
 
 const toc = [
-  { numeral: "I", title: "ADN editorial", detail: "Proposito, promesa, territorio y tono", page: "03" },
+  { numeral: "I", title: "ADN editorial", detail: "Propósito, promesa, territorio y tono", page: "03" },
   { numeral: "II", title: "Voz de la casa", detail: "Principios verbales y contrastes", page: "04" },
-  { numeral: "III", title: "El emblema", detail: "Medalla, lockup y area de respeto", page: "05" },
-  { numeral: "IV", title: "Sistema cromatico", detail: "Tinta, papel y oro en proporcion", page: "06" },
-  { numeral: "V", title: "Tipografia", detail: "La pareja editorial y su escala", page: "07" },
-  { numeral: "VI", title: "Uso y gobernanza", detail: "Reglas de aplicacion y cuidado", page: "08" }
+  { numeral: "III", title: "El emblema", detail: "Medalla, lockup y área de respeto", page: "05" },
+  { numeral: "IV", title: "Sistema cromático", detail: "Tinta, papel y oro en proporción", page: "06" },
+  { numeral: "V", title: "Tipografía", detail: "La pareja editorial y su escala", page: "07" },
+  { numeral: "VI", title: "Uso y gobernanza", detail: "Reglas de aplicación y cuidado", page: "08" }
 ];
 
 function pageColophon(doc: Pdf, medal: string) {
@@ -439,7 +439,7 @@ function pageColophon(doc: Pdf, medal: string) {
   sans(doc);
   let y = addTextBox(
     doc,
-    "Este documento reune el sistema visual y verbal de Anclora Insights. No es un catalogo de piezas: es la constitucion de una casa editorial. Cada regla existe para proteger una misma idea — el conocimiento merece una forma a su altura.",
+    "Este documento reúne el sistema visual y verbal de Anclora Insights. No es un catálogo de piezas: es la constitución de una casa editorial. Cada regla existe para proteger una misma idea — el conocimiento merece una forma a su altura.",
     M,
     88,
     CONTENT_W,
@@ -480,7 +480,7 @@ function pageColophon(doc: Pdf, medal: string) {
   doc.setFontSize(6.5);
   doc.setCharSpace(1.2);
   textColor(doc, colors.mutedGold);
-  doc.text("COLOFON", M, PAGE_H - 36);
+  doc.text("COLOFÓN", M, PAGE_H - 36);
   doc.setCharSpace(0);
 
   sans(doc);
@@ -501,9 +501,9 @@ function pageDna(doc: Pdf) {
   const introEnd = sectionOpener(
     doc,
     "I",
-    "Capitulo primero",
+    "Capítulo primero",
     "Una marca para el conocimiento que permanece.",
-    "Anclora Insights transforma complejidad en criterio. No compite por volumen ni velocidad: filtra, ordena y presenta conocimiento con profundidad suficiente para conservar valor despues del primer impacto. La marca comunica autoridad sin rigidez, calidez sin informalidad y belleza sin exceso ornamental."
+    "Anclora Insights transforma complejidad en criterio. No compite por volumen ni velocidad: filtra, ordena y presenta conocimiento con profundidad suficiente para conservar valor después del primer impacto. La marca comunica autoridad sin rigidez, calidez sin informalidad y belleza sin exceso ornamental."
   );
 
   const colW = (CONTENT_W - 8) / 2;
@@ -546,7 +546,7 @@ function pageDna(doc: Pdf) {
   serif(doc, "italic");
   doc.setFontSize(12.5);
   textColor(doc, colors.inkSoft);
-  const quote = "«La edicion es el arte de decidir que merece permanecer.»";
+  const quote = "«La edición es el arte de decidir qué merece permanecer.»";
   const quoteW = doc.getTextWidth(quote);
   doc.text(quote, (PAGE_W - quoteW) / 2, quoteY);
   hairline(doc, (PAGE_W - quoteW) / 2, quoteY + 5, (PAGE_W + quoteW) / 2, colors.gold, 0.3);
@@ -563,9 +563,9 @@ function pageVoice(doc: Pdf) {
   const introEnd = sectionOpener(
     doc,
     "II",
-    "Capitulo segundo",
+    "Capítulo segundo",
     "Autoridad serena, calidez contenida.",
-    "La voz de Anclora Insights es su activo mas reconocible despues del emblema. Escribe como edita: con calma, con precision y con la conviccion de que el lector exigente es la unica audiencia que importa."
+    "La voz de Anclora Insights es su activo más reconocible después del emblema. Escribe como edita: con calma, con precisión y con la convicción de que el lector exigente es la única audiencia que importa."
   );
 
   // Tres principios
@@ -606,7 +606,7 @@ function pageVoice(doc: Pdf) {
   fill(doc, colors.gold);
   doc.rect(M, panelY, half, 0.8, "F");
 
-  eyebrow(doc, "Asi suena Anclora", M + 6, panelY + 10);
+  eyebrow(doc, "Así suena Anclora", M + 6, panelY + 10);
   let yy = panelY + 18;
   voiceContrast.yes.forEach((line) => {
     serif(doc, "italic");
@@ -622,7 +622,7 @@ function pageVoice(doc: Pdf) {
   fill(doc, colors.ink);
   doc.rect(noX, panelY, half, panelH, "F");
 
-  eyebrow(doc, "Asi no suena", noX + 6, panelY + 10, colors.gold);
+  eyebrow(doc, "Así no suena", noX + 6, panelY + 10, colors.gold);
   yy = panelY + 18;
   voiceContrast.no.forEach((line) => {
     sans(doc);
@@ -636,7 +636,7 @@ function pageVoice(doc: Pdf) {
   sans(doc);
   addTextBox(
     doc,
-    "Regla practica: si una frase podria pertenecer a cualquier marca, no pertenece a esta. La prueba final de cada texto es la permanencia — ¿seguira siendo cierto, util y bien dicho dentro de cinco anos?",
+    "Regla práctica: si una frase podría pertenecer a cualquier marca, no pertenece a esta. La prueba final de cada texto es la permanencia — ¿seguirá siendo cierto, útil y bien dicho dentro de cinco años?",
     M,
     panelY + panelH + 12,
     CONTENT_W,
@@ -659,9 +659,9 @@ function pageEmblem(
   const introEnd = sectionOpener(
     doc,
     "III",
-    "Capitulo tercero",
+    "Capítulo tercero",
     "La medalla: una estrella sobre el mar del conocimiento.",
-    "El emblema de Anclora Insights une una estrella polar y tres olas que forman un libro abierto: la guia sobre el conocimiento. Existe en dos acabados — oro para fondos de tinta, inverso para fondos de papel — y nunca se redibuja ni se reinterpreta."
+    "El emblema de Anclora Insights une una estrella polar y tres olas que forman un libro abierto: la guía sobre el conocimiento. Existe en dos acabados — oro para fondos de tinta, inverso para fondos de papel — y nunca se redibuja ni se reinterpreta."
   );
 
   const half = (CONTENT_W - 8) / 2;
@@ -689,7 +689,7 @@ function pageEmblem(
   sans(doc);
   doc.setFontSize(6.8);
   textColor(doc, colors.muted);
-  doc.text("Documentos, carteleria clara y soportes impresos.", invX + 6, panelY + panelH - 4.5);
+  doc.text("Documentos, cartelería clara y soportes impresos.", invX + 6, panelY + panelH - 4.5);
 
   // Lockups
   const lockY = panelY + panelH + 7;
@@ -708,11 +708,11 @@ function pageEmblem(
   const ruleY = lockY + lockH + 11;
   const leftW = CONTENT_W * 0.52;
 
-  eyebrow(doc, "Area de respeto", M, ruleY);
+  eyebrow(doc, "Área de respeto", M, ruleY);
   sans(doc);
   addTextBox(
     doc,
-    "Alrededor de la medalla se reserva un area libre equivalente a la altura de la estrella (x). Ningun texto, borde o elemento grafico entra en ese perimetro.",
+    "Alrededor de la medalla se reserva un área libre equivalente a la altura de la estrella (x). Ningún texto, borde o elemento gráfico entra en ese perímetro.",
     M,
     ruleY + 6,
     leftW,
@@ -734,11 +734,11 @@ function pageEmblem(
   doc.text("x", diaX - 2.8, ruleY + 9);
 
   const minY = ruleY + 34;
-  eyebrow(doc, "Tamanos minimos", M, minY);
+  eyebrow(doc, "Tamaños mínimos", M, minY);
   sans(doc);
   addTextBox(
     doc,
-    "Impresion: la medalla nunca por debajo de 12 mm de diametro; el lockup, de 32 mm de anchura. Pantalla: 44 px y 120 px respectivamente. Por debajo de estos umbrales se usa unicamente la palabra «Anclora Insights» en texto.",
+    "Impresión: la medalla nunca por debajo de 12 mm de diámetro; el lockup, de 32 mm de anchura. Pantalla: 44 px y 120 px respectivamente. Por debajo de estos umbrales se usa únicamente la palabra «Anclora Insights» en texto.",
     M,
     minY + 6,
     CONTENT_W,
@@ -752,14 +752,14 @@ function pageEmblem(
 
 function pageColor(doc: Pdf) {
   lightPage(doc);
-  addRunningHeader(doc, "IV. Sistema cromatico", 6);
+  addRunningHeader(doc, "IV. Sistema cromático", 6);
 
   const introEnd = sectionOpener(
     doc,
     "IV",
-    "Capitulo cuarto",
+    "Capítulo cuarto",
     "Tinta, papel y oro: una paleta corta, deliberada.",
-    "Cuatro colores bastan. El negro construye autoridad, el crema sostiene la lectura y el oro — en sus dos registros — marca la jerarquia real. La proporcion importa tanto como el tono: la tinta domina, el papel respira, el oro apenas comparece."
+    "Cuatro colores bastan. El negro construye autoridad, el crema sostiene la lectura y el oro — en sus dos registros — marca la jerarquía real. La proporción importa tanto como el tono: la tinta domina, el papel respira, el oro apenas comparece."
   );
 
   // Barra de proporcion
@@ -785,7 +785,7 @@ function pageColor(doc: Pdf) {
   sans(doc);
   doc.setFontSize(6.5);
   textColor(doc, colors.muted);
-  doc.text("Proporcion de uso recomendada en cualquier pieza: 55 · 30 · 10 · 5", M, barY + barH + 5);
+  doc.text("Proporción de uso recomendada en cualquier pieza: 55 · 30 · 10 · 5", M, barY + barH + 5);
 
   // Tarjetas de color
   const colW = (CONTENT_W - 8) / 2;
@@ -831,7 +831,7 @@ function pageColor(doc: Pdf) {
 
   // Combinaciones canonicas
   const comboY = cardsTop + cardH * 2 + 16;
-  eyebrow(doc, "Combinaciones canonicas", M, comboY);
+  eyebrow(doc, "Combinaciones canónicas", M, comboY);
 
   const combos: Array<{ bg: Rgb; fg: Rgb; label: string; border?: boolean }> = [
     { bg: colors.ink, fg: colors.cream, label: "Tinta / Papel" },
@@ -865,12 +865,12 @@ function pageColor(doc: Pdf) {
 
 function pageType(doc: Pdf) {
   lightPage(doc);
-  addRunningHeader(doc, "V. Tipografia", 7);
+  addRunningHeader(doc, "V. Tipografía", 7);
 
   const introEnd = sectionOpener(
     doc,
     "V",
-    "Capitulo quinto",
+    "Capítulo quinto",
     "Una serif para pensar, una sans para trabajar.",
     "Libre Baskerville porta la voz editorial: titulares, citas y todo lo que aspira a permanecer. Inter porta la voz funcional: cuerpo, datos e interfaz. Nunca se intercambian los papeles; nunca entra una tercera familia."
   );
@@ -909,7 +909,7 @@ function pageType(doc: Pdf) {
 
   // Escala tipografica
   const scaleY = sampleY + sampleH + 14;
-  eyebrow(doc, "Escala de composicion", M, scaleY);
+  eyebrow(doc, "Escala de composición", M, scaleY);
 
   let rowY = scaleY + 8;
   typeScale.forEach((row) => {
@@ -923,7 +923,7 @@ function pageType(doc: Pdf) {
     } else {
       sans(doc, row.family.includes("SemiBold") ? "semibold" : row.family.includes("Bold") ? "bold" : "normal");
     }
-    doc.setFontSize(row.use === "Titular editorial" ? 15 : row.use === "Subtitulo" ? 11.5 : 8.6);
+    doc.setFontSize(row.use === "Titular editorial" ? 15 : row.use === "Subtítulo" ? 11.5 : 8.6);
     textColor(doc, colors.ink);
     doc.text(row.sample, M + 34, rowY);
 
@@ -940,7 +940,7 @@ function pageType(doc: Pdf) {
   sans(doc);
   addTextBox(
     doc,
-    "Interlineado editorial: 150 % del cuerpo en lectura larga, 120 % en titulares. Los epigrafes en mayusculas llevan tracking generoso (+16 %). Las cursivas de Baskerville se reservan para citas y enfasis de voz, nunca para parrafos completos.",
+    "Interlineado editorial: 150 % del cuerpo en lectura larga, 120 % en titulares. Los epígrafes en mayúsculas llevan tracking generoso (+16 %). Las cursivas de Baskerville se reservan para citas y énfasis de voz, nunca para párrafos completos.",
     M,
     rowY + 6,
     CONTENT_W,
@@ -959,9 +959,9 @@ function pageGovernance(doc: Pdf, lockupGold: string) {
   const introEnd = sectionOpener(
     doc,
     "VI",
-    "Capitulo sexto",
-    "Reglas minimas para una marca que dura.",
-    "Seis reglas gobiernan cualquier aplicacion de esta identidad. Son pocas y son innegociables: la coherencia acumulada es lo que convierte un logotipo en un sello."
+    "Capítulo sexto",
+    "Reglas mínimas para una marca que dura.",
+    "Seis reglas gobiernan cualquier aplicación de esta identidad. Son pocas y son innegociables: la coherencia acumulada es lo que convierte un logotipo en un sello."
   );
 
   const colW = (CONTENT_W - 8) / 2;
@@ -1063,7 +1063,7 @@ export async function buildBrandGuidelinesDoc(): Promise<jsPDF> {
 }
 
 export async function generateBrandGuidelinesPDF(onProgress?: (text: string) => void) {
-  onProgress?.("Preparando tipografias y assets...");
+  onProgress?.("Preparando tipografías y assets...");
 
   onProgress?.("Maquetando manual editorial...");
   const doc = await buildBrandGuidelinesDoc();
