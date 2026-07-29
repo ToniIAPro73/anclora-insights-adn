@@ -6,6 +6,9 @@ import BrandBook from "./components/BrandBook";
 import EditorialAssistant from "./components/EditorialAssistant";
 import ContrastChecker from "./components/ContrastChecker";
 import PrintBrandGuidelines from "./components/PrintBrandGuidelines";
+import goldMedalUrl from "../assets/anclora-insights-medalla-oro-transparente.png";
+import inverseMedalUrl from "../assets/anclora-insights-medalla-inverso-transparente.png";
+import heroPremiumUrl from "../assets/anclora-insights-hero-premium-editorial.png";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState<boolean>(true);
@@ -19,6 +22,19 @@ export default function App() {
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
+  };
+
+  const activateTab = (tab: typeof activeTab, shouldScroll = false) => {
+    setActiveTab(tab);
+
+    if (shouldScroll) {
+      window.requestAnimationFrame(() => {
+        document.getElementById("tab-content")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    }
   };
 
   return (
@@ -40,7 +56,7 @@ export default function App() {
           {/* Logo & Brand Name */}
           <div className="flex items-center gap-4">
             <img 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB0Jkwa4H5-ygU_qx29MDcUUzlsxmZzMGySRkz1plgHBpzYTUswAaVYqC8Kuk7g6wtw4W23WAubA2i2SyQI-5DNLS7fwGrYL0w9bucGMlU-Jy2i7Hh-eh05GXijP4Ap-0jTR747PWFj1FWf6ocSoFckoeHXnbGKjuli7ie7A482QXYQOUW6PV1iJzb_0TRwa1Ua0LFTUyT2hXTFgrY56ezXidhS7tWJBChHneVlDzTt6BlNvlMHHiDWmARUDlKha-6WD71EbMKbKtl" 
+              src={darkMode ? goldMedalUrl : inverseMedalUrl}
               alt="Anclora Logo" 
               className={`w-9 h-9 object-contain rounded-full transition-transform duration-500 hover:rotate-12 ${
                 !darkMode ? "filter brightness-90 contrast-125" : ""
@@ -111,7 +127,7 @@ export default function App() {
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
               <motion.button
-                onClick={() => setActiveTab("assistant")}
+                onClick={() => activateTab("assistant", true)}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 15 }}
@@ -120,7 +136,7 @@ export default function App() {
                 Probar Asistente Editorial AI <Sparkles className="w-3.5 h-3.5" />
               </motion.button>
               <motion.button
-                onClick={() => setActiveTab("brandbook")}
+                onClick={() => activateTab("brandbook", true)}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 15 }}
@@ -138,9 +154,9 @@ export default function App() {
           {/* Book / Device Mockup Illustration */}
           <div className="w-full md:w-80 shrink-0 relative flex justify-center z-10">
             <img 
-              src="https://lh3.googleusercontent.com/aida/AP1WRLs4rmZLO_gz5lAA2RZQis3K7sjzNyt0j98thNYmpOSrydhd1u2PQUUwK1gcD-eUz5y-px1Q12lUNpou1ArPgj7YaVxhuZr2DxFK8sduDAhFMjeDAubPiaVOXWFElNI0UC3UEBj1GS-kCAI79SjQ-OipMqSZqp0HusO4JsHCTRKzAnufskiGyyqd5BzTot_eodq2r-J8g_HZKRyj6-J5by4cmi5tlSwU9S_xfM9iZGH0cBc_2pXx7_klGLJ9" 
+              src={heroPremiumUrl}
               alt="Anclora Book Cover Mockup" 
-              className={`w-64 object-contain rounded-lg shadow-xl border ${
+              className={`w-full max-w-sm object-cover aspect-[16/10] rounded-lg shadow-xl border ${
                 darkMode ? "border-metallic-gold/20" : "border-metallic-gold/10"
               }`}
             />
@@ -154,7 +170,7 @@ export default function App() {
           {tabs.map((tab) => (
             <motion.button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => activateTab(tab.id)}
               whileHover={{ scale: 1.03, y: -1 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 500, damping: 20 }}
@@ -179,7 +195,7 @@ export default function App() {
         </div>
 
         {/* Interactive Tab Contents with smooth fade */}
-        <div className="py-6">
+        <div id="tab-content" className="scroll-mt-36 py-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -207,7 +223,7 @@ export default function App() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB0Jkwa4H5-ygU_qx29MDcUUzlsxmZzMGySRkz1plgHBpzYTUswAaVYqC8Kuk7g6wtw4W23WAubA2i2SyQI-5DNLS7fwGrYL0w9bucGMlU-Jy2i7Hh-eh05GXijP4Ap-0jTR747PWFj1FWf6ocSoFckoeHXnbGKjuli7ie7A482QXYQOUW6PV1iJzb_0TRwa1Ua0LFTUyT2hXTFgrY56ezXidhS7tWJBChHneVlDzTt6BlNvlMHHiDWmARUDlKha-6WD71EbMKbKtl" 
+                src={darkMode ? goldMedalUrl : inverseMedalUrl}
                 alt="Anclora Logo" 
                 className={`w-6 h-6 object-contain rounded-full ${
                   !darkMode ? "filter brightness-90 contrast-125" : ""

@@ -4,12 +4,52 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ path: ".env.local", quiet: true });
+dotenv.config({ quiet: true });
 
 interface EditorialAssistantRequest {
   prompt?: string;
   type?: "rewrite" | "generate" | "book-summary";
   textToAdapt?: string;
+}
+
+const GEMINI_MODELS = ["gemini-3.5-flash", "gemini-2.0-flash"];
+
+function buildLocalEditorialFallback({ type, prompt, textToAdapt }: Required<EditorialAssistantRequest>) {
+  const source = (textToAdapt || prompt).trim();
+
+  if (type === "generate") {
+    return [
+      `El tema propuesto exige una lectura pausada: ${source}`,
+      "",
+      "La tesis central debe partir de una idea sencilla: no todo lo visible merece atención, y no toda atención produce criterio. Anclora Insights abordaría este ensayo desde una perspectiva estratégica, separando el ruido operativo de las señales capaces de orientar decisiones duraderas.",
+      "",
+      "El desarrollo puede estructurarse en tres movimientos: primero, definir el conflicto intelectual; después, aislar los patrones relevantes; por último, traducirlos en una conclusión aplicable, sobria y verificable."
+    ].join("\n");
+  }
+
+  if (type === "book-summary") {
+    return [
+      `Resumen ejecutivo: ${source}`,
+      "",
+      "La obra se plantea como una guía de pensamiento estratégico para lectores exigentes. Su promesa no es ofrecer atajos, sino ordenar una tesis con precisión, profundidad y utilidad práctica.",
+      "",
+      "Estructura sugerida: apertura conceptual, diagnóstico del problema, principios de interpretación, casos o escenas de aplicación, y cierre con un marco de decisión claro. El tono debe mantenerse sereno, editorial y libre de exageración comercial."
+    ].join("\n");
+  }
+
+  return [
+    "Versión adaptada al tono Anclora Insights:",
+    "",
+    source
+      .replace(/[¡!]/g, "")
+      .replace(/\bsúper\b/gi, "especialmente")
+      .replace(/\bultra rápido\b/gi, "sintético")
+      .replace(/\bclick aquí abajo\b/gi, "explorar el análisis completo")
+      .replace(/\bya mismo\b/gi, "cuando corresponda"),
+    "",
+    "El texto gana autoridad cuando reduce la urgencia artificial y conserva solo aquello que aporta claridad, criterio y permanencia."
+  ].join("\n");
 }
 
 async function startServer() {
@@ -42,7 +82,6 @@ async function startServer() {
   app.post("/api/editorial-assistant", async (req, res) => {
     try {
       const { prompt = "", type, textToAdapt = "" } = req.body as EditorialAssistantRequest;
-      const client = getGeminiClient();
 
       const systemInstruction = `
 You are the AI Editorial Director for Anclora Insights, a premium imprint of Anclora Group.
@@ -70,16 +109,43 @@ When responding:
         promptText = prompt;
       }
 
-      const response = await client.models.generateContent({
-        model: "gemini-3.5-flash",
-        contents: promptText,
-        config: {
-          systemInstruction,
-          temperature: 0.7,
-        },
-      });
+      let text = "";
+      let lastError: unknown;
 
-      res.json({ text: response.text });
+      try {
+        const client = getGeminiClient();
+
+        for (const model of GEMINI_MODELS) {
+          try {
+            const response = await client.models.generateContent({
+              model,
+              contents: promptText,
+              config: {
+                systemInstruction,
+                temperature: 0.7,
+              },
+            });
+
+            text = response.text || "";
+            break;
+          } catch (error) {
+            lastError = error;
+          }
+        }
+      } catch (error) {
+        lastError = error;
+      }
+
+      if (!text) {
+        console.warn("Gemini unavailable, using local editorial fallback:", lastError);
+        text = buildLocalEditorialFallback({
+          prompt,
+          type: type || "rewrite",
+          textToAdapt
+        });
+      }
+
+      res.json({ text });
     } catch (error) {
       const message = error instanceof Error ? error.message : "Internal Server Error";
       console.error("Gemini API Error:", error);

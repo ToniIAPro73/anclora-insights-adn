@@ -1,4 +1,6 @@
 import { BookOpen, Compass, Award, Feather, Eye } from "lucide-react";
+import goldMedalUrl from "../../assets/anclora-insights-medalla-oro-transparente.png";
+import lightLockupUrl from "../../assets/anclora-insights-lockup-light-transparente.png";
 
 interface PrintBrandGuidelinesProps {
   idPrefix?: string;
@@ -411,7 +413,7 @@ export default function PrintBrandGuidelines({ idPrefix = "print-page" }: PrintB
               <div className="p-4 border border-stone-200 bg-white rounded-lg flex items-center gap-4">
                 <div className="w-16 h-16 shrink-0 bg-[#0F172A] rounded-full flex items-center justify-center p-2">
                   <img 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRJtJ2ouKuW3IROCUe1u6u5lzcZTGBLZpIW1Aqj_zP1nwU5ttmyYVb1sJ8NJ3Hgv4CAsJLa4nkCRsHas3gmtgkx_pP8OH7IioUUri-3Uawq4jZr89kY1RDJA8YVXRFG1ecwSgdDs59xuFuFcUul-J5o5Pl3Nj1Ya5ZqkP2HAyJ4e0wqHCVX7puAkiExwNUTSlNoTDVipaFckNlLFnvGNPUtLWu-afFCkjUU3htrMq5ToGo2uonesP2LL0XUqcPFfvzTIRxUE1VlTcf" 
+                    src={goldMedalUrl}
                     alt="Sello Circular" 
                     referrerPolicy="no-referrer"
                     className="w-12 h-12 object-contain rounded-full"
@@ -428,7 +430,7 @@ export default function PrintBrandGuidelines({ idPrefix = "print-page" }: PrintB
               <div className="p-4 border border-stone-200 bg-white rounded-lg flex items-center gap-4">
                 <div className="w-16 h-16 shrink-0 bg-[#F59E0B] rounded-lg flex items-center justify-center p-2">
                   <img 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn4Nu3d_g0ocnasxvHSR1J-KBfol57dBwcCoz542gkpPJ5bTjD2PUIIW4TbHdfKpQNZCR6r3EpNcRGy28RKf5tEBjYc8CtaMOkXpL9YGj2YOBx1jLOzqmS6YSTWZAjtY8xrG6DWLSj6SOVkLS7K3OyGQaWurr7kKESTrkxQcFPNHps7w6DlpdlvCi6Fjh8MapThYEnwkXXcCr7foACfr5oOIo0GYvyHswhJjtvVgQRUqSFgzA5p17V1gHSvCS--sYMVEvOWMw8oX5f" 
+                    src={lightLockupUrl}
                     alt="Sello Inverso" 
                     referrerPolicy="no-referrer"
                     className="w-12 h-12 object-contain rounded-full"

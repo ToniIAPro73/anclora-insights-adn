@@ -2,6 +2,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Copy, Check, Type, AlertCircle, Info, ArrowUpRight, Search, ChevronDown, ChevronUp, BookMarked } from "lucide-react";
 import { ColorSwatch, LogoVariation, FontSpecimen, EditorialGuideline } from "../types";
+import goldLockupUrl from "../../assets/anclora-insights-lockup-oro-transparente.png";
+import lightLockupUrl from "../../assets/anclora-insights-lockup-light-transparente.png";
+import goldMedalUrl from "../../assets/anclora-insights-medalla-oro-transparente.png";
+import inverseMedalUrl from "../../assets/anclora-insights-medalla-inverso-transparente.png";
 
 interface BrandBookProps {
   darkMode: boolean;
@@ -47,7 +51,7 @@ const logoVariations: LogoVariation[] = [
     id: "main-lockup",
     name: "Logo Lockup Principal",
     description: "La combinación horizontal de nuestro sello 'Medalla' y la tipografía serif elegante. Perfectamente equilibrado.",
-    url: "/assets/anclora-insights-lockup-oro-transparente.png",
+    url: goldLockupUrl,
     recommendedUse: "Cabeceras de sitios web, portadas de informes, material de prensa oficial y papelería corporativa premium.",
     bgColorClass: "dynamic"
   },
@@ -55,7 +59,7 @@ const logoVariations: LogoVariation[] = [
     id: "gold-medal",
     name: "Símbolo: La Medalla",
     description: "Sello circular representativo con un ancla heráldica abstracta y la estrella del conocimiento en oro metálico.",
-    url: "https://lh3.googleusercontent.com/aida-public/AB6AXuCRJtJ2ouKuW3IROCUe1u6u5lzcZTGBLZpIW1Aqj_zP1nwU5ttmyYVb1sJ8NJ3Hgv4CAsJLa4nkCRsHas3gmtgkx_pP8OH7IioUUri-3Uawq4jZr89kY1RDJA8YVXRFG1ecwSgdDs59xuFuFcUul-J5o5Pl3Nj1Ya5ZqkP2HAyJ4e0wqHCVX7puAkiExwNUTSlNoTDVipaFckNlLFnvGNPUtLWu-afFCkjUU3htrMq5ToGo2uonesP2LL0XUqcPFfvzTIRxUE1VlTcf",
+    url: goldMedalUrl,
     recommendedUse: "Perfiles de redes sociales, contraportadas, marcas de agua, y elementos circulares físicos.",
     bgColorClass: "bg-[#0F172A]"
   },
@@ -63,7 +67,7 @@ const logoVariations: LogoVariation[] = [
     id: "solid-inverse",
     name: "Símbolo Inverso / Sólido",
     description: "Versión de alto contraste del símbolo principal, optimizada para aplicaciones sobre fondos dorados o de color continuo.",
-    url: "https://lh3.googleusercontent.com/aida-public/AB6AXuCn4Nu3d_g0ocnasxvHSR1J-KBfol57dBwcCoz542gkpPJ5bTjD2PUIIW4TbHdfKpQNZCR6r3EpNcRGy28RKf5tEBjYc8CtaMOkXpL9YGj2YOBx1jLOzqmS6YSTWZAjtY8xrG6DWLSj6SOVkLS7K3OyGQaWurr7kKESTrkxQcFPNHps7w6DlpdlvCi6Fjh8MapThYEnwkXXcCr7foACfr5oOIo0GYvyHswhJjtvVgQRUqSFgzA5p17V1gHSvCS--sYMVEvOWMw8oX5f",
+    url: lightLockupUrl,
     recommendedUse: "Estampados físicos, impresión a un solo color, sellos de lacre, y texturas de fondo.",
     bgColorClass: "bg-[#F59E0B]"
   },
@@ -71,7 +75,7 @@ const logoVariations: LogoVariation[] = [
     id: "favicon-app",
     name: "Sello Favicon & App Icon",
     description: "La expresión mínima del logotipo en formato cuadrado de bordes suaves, ideal para interfaces web y móviles.",
-    url: "https://lh3.googleusercontent.com/aida-public/AB6AXuBB0Jkwa4H5-ygU_qx29MDcUUzlsxmZzMGySRkz1plgHBpzYTUswAaVYqC8Kuk7g6wtw4W23WAubA2i2SyQI-5DNLS7fwGrYL0w9bucGMlU-Jy2i7Hh-eh05GXijP4Ap-0jTR747PWFj1FWf6ocSoFckoeHXnbGKjuli7ie7A482QXYQOUW6PV1iJzb_0TRwa1Ua0LFTUyT2hXTFgrY56ezXidhS7tWJBChHneVlDzTt6BlNvlMHHiDWmARUDlKha-6WD71EbMKbKtl",
+    url: inverseMedalUrl,
     recommendedUse: "Pestaña de navegador (favicon), iconos de aplicación móvil, accesos directos de escritorio.",
     bgColorClass: "bg-stone-100 border"
   }
@@ -272,7 +276,7 @@ export default function BrandBook({ darkMode }: BrandBookProps) {
                 alt={activeLogoData.name}
                 src={
                   activeLogoData.id === "main-lockup" && !darkMode
-                    ? "/assets/anclora-insights-lockup-light-transparente.png"
+                    ? lightLockupUrl
                     : activeLogoData.url
                 }
                 className={`max-h-40 md:max-h-48 object-contain select-none relative z-10 transition-all duration-500 ${
