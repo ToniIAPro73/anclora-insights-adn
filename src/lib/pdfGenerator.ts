@@ -1,5 +1,4 @@
 import jsPDF from "jspdf";
-import heroWideUrl from "../../assets/anclora-insights-hero-premium-editorial.png";
 import heroEditorialCropUrl from "../../assets/anclora-insights-hero-editorial-crop.png";
 import goldMedalUrl from "../../assets/anclora-insights-medalla-oro-transparente.png";
 import inverseMedalUrl from "../../assets/anclora-insights-medalla-inverso-transparente.png";
@@ -13,8 +12,8 @@ import libreBoldUrl from "../../assets/fonts/LibreBaskerville-Bold.ttf?url";
 import libreItalicUrl from "../../assets/fonts/LibreBaskerville-Italic.ttf?url";
 
 /* -------------------------------------------------------------
-   Anclora Insights - Manual de Identidad Editorial
-   A4 - 210 x 297 mm - 8 paginas - tipografia embebida
+   Anclora Insights · Manual de Identidad Editorial
+   A4 · 210 × 297 mm · 8 páginas · tipografía embebida
    ------------------------------------------------------------- */
 
 const PAGE_W = 210;
@@ -27,7 +26,7 @@ const colors = {
   inkSoft: [30, 41, 59] as const, // #1E293B
   inkDeep: [10, 15, 28] as const,
   cream: [248, 250, 252] as const, // #F8FAFC Crema Papel
-  gold: [245, 158, 11] as const, // #F59E0B Oro Metalico
+  gold: [245, 158, 11] as const, // #F59E0B Oro Metálico
   mutedGold: [217, 119, 6] as const, // #D97706 Oro Mitigado
   goldSoft: [252, 231, 196] as const,
   line: [226, 232, 240] as const,
@@ -61,7 +60,7 @@ const pdfFonts = [
   { url: libreItalicUrl, file: "LibreBaskerville-Italic.ttf", family: "LibreBaskerville", style: "italic" as const }
 ];
 
-/* -- Contenido ------------------------------------------------- */
+/* ── Contenido ─────────────────────────────────────────────── */
 
 const dnaBlocks = [
   {
@@ -182,7 +181,7 @@ const usageRules = [
   }
 ];
 
-/* -- Utilidades ------------------------------------------------ */
+/* ── Utilidades ────────────────────────────────────────────── */
 
 async function toDataUrl(url: string) {
   const response = await fetch(url);
@@ -287,7 +286,7 @@ function addTextBox(doc: Pdf, value: string, x: number, y: number, width: number
   return y + lines.length * lineHeight;
 }
 
-/* -- Estructura comun ------------------------------------------ */
+/* ── Estructura común ──────────────────────────────────────── */
 
 function addRunningHeader(doc: Pdf, section: string, page: number) {
   hairline(doc, M, 16.5, PAGE_W - M, colors.line, 0.2);
@@ -321,7 +320,7 @@ function addFooter(doc: Pdf, page: number, dark = false) {
 }
 
 function sectionOpener(doc: Pdf, numeral: string, kicker: string, title: string, intro: string) {
-  // Numeral romano grande en serif, como capitulo de libro
+  // Numeral romano grande en serif, como capítulo de libro
   serif(doc, "normal");
   doc.setFontSize(46);
   textColor(doc, colors.goldSoft);
@@ -352,17 +351,17 @@ function lightPage(doc: Pdf) {
   doc.rect(0, 0, PAGE_W, PAGE_H, "F");
 }
 
-/* -- 01 · Portada ---------------------------------------------- */
+/* ── 01 · Portada ──────────────────────────────────────────── */
 
 function pageCover(doc: Pdf, hero: string, medal: string) {
   fill(doc, colors.inkDeep);
   doc.rect(0, 0, PAGE_W, PAGE_H, "F");
 
-  // Imagen editorial enmarcada, con filete dorado
+  // Imagen editorial enmarcada, con filete dorado (proporción original 980×941)
   const imgX = 88;
   const imgY = 34;
-  const imgW = 96;
-  const imgH = 92;
+  const imgW = 90;
+  const imgH = 86.4;
   draw(doc, colors.gold);
   doc.setLineWidth(0.3);
   doc.rect(imgX - 3, imgY - 3, imgW + 6, imgH + 6);
@@ -371,7 +370,7 @@ function pageCover(doc: Pdf, hero: string, medal: string) {
   // Medalla
   doc.addImage(medal, "PNG", M, 42, 26, 26.5);
 
-  // Epigrafe y titulo
+  // Epígrafe y título
   eyebrow(doc, `Manual de Identidad Editorial · ${EDITION}`, M, 152, colors.gold);
 
   serif(doc, "bold");
@@ -398,17 +397,17 @@ function pageCover(doc: Pdf, hero: string, medal: string) {
     { fontSize: 8.5, lineHeight: 5, color: colors.slateLight }
   );
 
-  // Linea de honor inferior
+  // Línea de honor inferior
   hairline(doc, M, PAGE_H - 34, PAGE_W - M, colors.lineDark, 0.25);
   sans(doc, "semibold");
   doc.setFontSize(7);
   textColor(doc, colors.slateLight);
-  doc.text(`Formato A4 · 210 x 297 mm · Tipografía embebida · ${VERSION}`, M, PAGE_H - 27);
+  doc.text(`Formato A4 · 210 × 297 mm · Tipografía embebida · ${VERSION}`, M, PAGE_H - 27);
   textColor(doc, colors.gold);
   doc.text("ANCLORA GROUP", PAGE_W - M, PAGE_H - 27, { align: "right" });
 }
 
-/* -- 02 · Colofon e indice ------------------------------------- */
+/* ── 02 · Colofón e índice ─────────────────────────────────── */
 
 const toc = [
   { numeral: "I", title: "ADN editorial", detail: "Propósito, promesa, territorio y tono", page: "03" },
@@ -446,7 +445,7 @@ function pageColophon(doc: Pdf, medal: string) {
     { fontSize: 9, lineHeight: 5.2, justify: true }
   );
 
-  // Indice
+  // Índice
   y += 10;
   toc.forEach((entry) => {
     serif(doc, "normal");
@@ -464,7 +463,7 @@ function pageColophon(doc: Pdf, medal: string) {
     textColor(doc, colors.muted);
     doc.text(entry.detail, M + 14, y + 5);
 
-    // Linea de puntos hasta la pagina
+    // Línea de puntos hasta la página
     serif(doc, "italic");
     doc.setFontSize(9);
     textColor(doc, colors.ink);
@@ -474,7 +473,7 @@ function pageColophon(doc: Pdf, medal: string) {
     y += 21;
   });
 
-  // Colofon
+  // Colofón
   hairline(doc, M, PAGE_H - 44, PAGE_W - M, colors.line, 0.2);
   sans(doc, "bold");
   doc.setFontSize(6.5);
@@ -492,7 +491,7 @@ function pageColophon(doc: Pdf, medal: string) {
   addFooter(doc, 2);
 }
 
-/* -- 03 · ADN editorial ---------------------------------------- */
+/* ── 03 · ADN editorial ────────────────────────────────────── */
 
 function pageDna(doc: Pdf) {
   lightPage(doc);
@@ -554,7 +553,7 @@ function pageDna(doc: Pdf) {
   addFooter(doc, 3);
 }
 
-/* -- 04 · Voz de la casa --------------------------------------- */
+/* ── 04 · Voz de la casa ───────────────────────────────────── */
 
 function pageVoice(doc: Pdf) {
   lightPage(doc);
@@ -593,12 +592,12 @@ function pageVoice(doc: Pdf) {
     });
   });
 
-  // Contraste Si / No
+  // Contraste Sí / No
   const half = (CONTENT_W - 8) / 2;
   const panelY = top + 52;
   const panelH = 78;
 
-  // Panel SI (claro, oro)
+  // Panel SÍ (claro, oro)
   fill(doc, colors.white);
   draw(doc, colors.line);
   doc.setLineWidth(0.2);
@@ -646,7 +645,7 @@ function pageVoice(doc: Pdf) {
   addFooter(doc, 4);
 }
 
-/* -- 05 · El emblema ------------------------------------------- */
+/* ── 05 · El emblema ───────────────────────────────────────── */
 
 function pageEmblem(
   doc: Pdf,
@@ -691,20 +690,23 @@ function pageEmblem(
   textColor(doc, colors.muted);
   doc.text("Documentos, cartelería clara y soportes impresos.", invX + 6, panelY + panelH - 4.5);
 
-  // Lockups
+  // Lockups (proporción original 1966×449 ≈ 4.38:1, sin deformar)
   const lockY = panelY + panelH + 7;
   const lockH = 30;
+  const lockW = 70;
+  const lockImgH = lockW / 4.378;
+  const lockImgY = lockY + (lockH - lockImgH) / 2;
 
   fill(doc, colors.ink);
   doc.rect(M, lockY, half, lockH, "F");
-  doc.addImage(lockups.gold, "PNG", M + 8, lockY + lockH / 2 - 5.2, half - 16, 10.4);
+  doc.addImage(lockups.gold, "PNG", M + (half - lockW) / 2, lockImgY, lockW, lockImgH);
 
   fill(doc, colors.white);
   draw(doc, colors.line);
   doc.rect(invX, lockY, half, lockH, "FD");
-  doc.addImage(lockups.light, "PNG", invX + 8, lockY + lockH / 2 - 5.2, half - 16, 10.4);
+  doc.addImage(lockups.light, "PNG", invX + (half - lockW) / 2, lockImgY, lockW, lockImgH);
 
-  // Area de respeto y tamanos minimos
+  // Área de respeto y tamaños mínimos
   const ruleY = lockY + lockH + 11;
   const leftW = CONTENT_W * 0.52;
 
@@ -748,7 +750,7 @@ function pageEmblem(
   addFooter(doc, 5);
 }
 
-/* -- 06 · Sistema cromatico ------------------------------------ */
+/* ── 06 · Sistema cromático ────────────────────────────────── */
 
 function pageColor(doc: Pdf) {
   lightPage(doc);
@@ -762,7 +764,7 @@ function pageColor(doc: Pdf) {
     "Cuatro colores bastan. El negro construye autoridad, el crema sostiene la lectura y el oro — en sus dos registros — marca la jerarquía real. La proporción importa tanto como el tono: la tinta domina, el papel respira, el oro apenas comparece."
   );
 
-  // Barra de proporcion
+  // Barra de proporción
   const barY = introEnd + 10;
   const barH = 7;
   const shares: Array<[Rgb, number]> = [
@@ -789,12 +791,12 @@ function pageColor(doc: Pdf) {
 
   // Tarjetas de color
   const colW = (CONTENT_W - 8) / 2;
-  const cardH = 56;
-  const cardsTop = barY + 22;
+  const cardH = 50;
+  const cardsTop = barY + 20;
 
   palette.forEach((swatch, index) => {
     const x = M + (index % 2) * (colW + 8);
-    const y = cardsTop + Math.floor(index / 2) * (cardH + 8);
+    const y = cardsTop + Math.floor(index / 2) * (cardH + 7);
 
     fill(doc, colors.white);
     draw(doc, colors.line);
@@ -802,35 +804,35 @@ function pageColor(doc: Pdf) {
     doc.rect(x, y, colW, cardH, "FD");
 
     // Muestra de color
-    fill(doc, swatch.hex === "#F8FAFC" ? colors.cream : swatch.hex === "#0F172A" ? colors.ink : swatch.hex === "#F59E0B" ? colors.gold : colors.mutedGold);
+    fill(doc, swatch.hex === "#F8FAFC" ? colors.cream : (swatch.hex === "#0F172A" ? colors.ink : swatch.hex === "#F59E0B" ? colors.gold : colors.mutedGold));
     draw(doc, colors.line);
     doc.rect(x, y, 24, cardH, "FD");
 
     sans(doc, "bold");
     doc.setFontSize(9);
     textColor(doc, colors.ink);
-    doc.text(swatch.name, x + 30, y + 9);
+    doc.text(swatch.name, x + 30, y + 8.5);
 
     sans(doc);
-    doc.setFontSize(6.8);
+    doc.setFontSize(6.6);
     textColor(doc, colors.muted);
-    doc.text(`${swatch.hex}  ·  RGB ${swatch.rgb}  ·  ${swatch.share} de la pieza`, x + 30, y + 14.5);
+    doc.text(`${swatch.hex} · RGB ${swatch.rgb}`, x + 30, y + 13.5);
 
     serif(doc, "italic");
-    doc.setFontSize(8);
+    doc.setFontSize(7.8);
     textColor(doc, colors.mutedGold);
-    doc.text(swatch.role, x + 30, y + 22);
+    doc.text(`${swatch.role} · ${swatch.share} de la pieza`, x + 30, y + 20.5);
 
     sans(doc);
-    addTextBox(doc, swatch.usage, x + 30, y + 29, colW - 36, {
+    addTextBox(doc, swatch.usage, x + 30, y + 27, colW - 36, {
       fontSize: 7.2,
       lineHeight: 4,
       justify: true
     });
   });
 
-  // Combinaciones canonicas
-  const comboY = cardsTop + cardH * 2 + 16;
+  // Combinaciones canónicas
+  const comboY = cardsTop + cardH * 2 + 14;
   eyebrow(doc, "Combinaciones canónicas", M, comboY);
 
   const combos: Array<{ bg: Rgb; fg: Rgb; label: string; border?: boolean }> = [
@@ -846,22 +848,22 @@ function pageColor(doc: Pdf) {
     fill(doc, combo.bg);
     if (combo.border) draw(doc, colors.line);
     doc.setLineWidth(0.2);
-    doc.rect(x, y, comboW, 22, combo.border ? "FD" : "F");
+    doc.rect(x, y, comboW, 18, combo.border ? "FD" : "F");
 
     serif(doc, "bold");
-    doc.setFontSize(11);
+    doc.setFontSize(10);
     textColor(doc, combo.fg);
-    doc.text("Aa", x + 5, y + 12);
+    doc.text("Aa", x + 4, y + 10);
 
     sans(doc);
-    doc.setFontSize(6.2);
-    doc.text(combo.label, x + 5, y + 18.5);
+    doc.setFontSize(6);
+    doc.text(combo.label, x + 4, y + 15);
   });
 
   addFooter(doc, 6);
 }
 
-/* -- 07 · Tipografia ------------------------------------------- */
+/* ── 07 · Tipografía ───────────────────────────────────────── */
 
 function pageType(doc: Pdf) {
   lightPage(doc);
@@ -890,7 +892,11 @@ function pageType(doc: Pdf) {
   doc.setFontSize(9.5);
   textColor(doc, colors.gold);
   doc.text("Conocimiento", M + 6, sampleY + 36);
-  eyebrow(doc, "Libre Baskerville · Regular, Italic, Bold", M + 6, sampleY + sampleH - 6, colors.gold);
+  eyebrow(doc, "Libre Baskerville", M + 6, sampleY + sampleH - 10.5, colors.gold);
+  sans(doc);
+  doc.setFontSize(6.2);
+  textColor(doc, colors.slateLight);
+  doc.text("Regular · Italic · Bold", M + 6, sampleY + sampleH - 5);
 
   const sansX = M + half + 8;
   fill(doc, colors.white);
@@ -905,9 +911,13 @@ function pageType(doc: Pdf) {
   doc.setFontSize(9.5);
   textColor(doc, colors.mutedGold);
   doc.text("Criterio 0123456789", sansX + 6, sampleY + 36);
-  eyebrow(doc, "Inter · Regular, SemiBold, Bold", sansX + 6, sampleY + sampleH - 6);
+  eyebrow(doc, "Inter", sansX + 6, sampleY + sampleH - 10.5);
+  sans(doc);
+  doc.setFontSize(6.2);
+  textColor(doc, colors.muted);
+  doc.text("Regular · SemiBold · Bold", sansX + 6, sampleY + sampleH - 5);
 
-  // Escala tipografica
+  // Escala tipográfica
   const scaleY = sampleY + sampleH + 14;
   eyebrow(doc, "Escala de composición", M, scaleY);
 
@@ -950,7 +960,7 @@ function pageType(doc: Pdf) {
   addFooter(doc, 7);
 }
 
-/* -- 08 · Uso y gobernanza ------------------------------------- */
+/* ── 08 · Uso y gobernanza ─────────────────────────────────── */
 
 function pageGovernance(doc: Pdf, lockupGold: string) {
   lightPage(doc);
@@ -1012,21 +1022,21 @@ function pageGovernance(doc: Pdf, lockupGold: string) {
 
   sans(doc, "bold");
   doc.setFontSize(6.5);
-  doc.setCharSpace(1.2);
   textColor(doc, colors.gold);
-  doc.text(`ANCLORA INSIGHTS · MANUAL DE IDENTIDAD ${VERSION} · ${EDITION.toUpperCase()}`, PAGE_W / 2, closeY + 58, {
-    align: "center"
-  });
+  const closingMeta = `ANCLORA INSIGHTS · MANUAL DE IDENTIDAD ${VERSION} · ${EDITION.toUpperCase()}`;
+  const tracking = 1.2;
+  const closingMetaW = doc.getTextWidth(closingMeta) + tracking * (closingMeta.length - 1);
+  doc.setCharSpace(tracking);
+  doc.text(closingMeta, (PAGE_W - closingMetaW) / 2, closeY + 58);
   doc.setCharSpace(0);
 
   addFooter(doc, 8, true);
 }
 
-/* -- Generacion ------------------------------------------------ */
+/* ── Generación ────────────────────────────────────────────── */
 
 export async function buildBrandGuidelinesDoc(): Promise<jsPDF> {
-  const [heroWide, heroCrop, goldMedal, inverseMedal, lockupGold, lockupLight] = await Promise.all([
-    toDataUrl(heroWideUrl),
+  const [heroCrop, goldMedal, inverseMedal, lockupGold, lockupLight] = await Promise.all([
     toDataUrl(heroEditorialCropUrl),
     toDataUrl(goldMedalUrl),
     toDataUrl(inverseMedalUrl),
@@ -1050,7 +1060,7 @@ export async function buildBrandGuidelinesDoc(): Promise<jsPDF> {
     keywords: "branding, identidad, editorial, Anclora Insights, manual de marca"
   });
 
-  pageCover(doc, heroWide, goldMedal);
+  pageCover(doc, heroCrop, goldMedal);
   pageColophon(doc, goldMedal);
   pageDna(doc);
   pageVoice(doc);
