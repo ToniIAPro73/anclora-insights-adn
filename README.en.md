@@ -30,7 +30,7 @@
 | --- | --- |
 | Purpose | Sello Editorial de Alta Autoridad\|Transformando el conocimiento en |
 | Family | `internal` |
-| Visibility | `private` |
+| Visibility | `public` (deliberate owner decision, 2026-08-18) |
 | Role | Internal working repository |
 
 ## Conceptual workflow

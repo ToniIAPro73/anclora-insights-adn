@@ -30,7 +30,7 @@
 | --- | --- |
 | Proposito | Sello Editorial de Alta Autoridad\|Transformando el conocimiento en |
 | Familia | `internal` |
-| Visibilidad | `private` |
+| Visibilidad | `public` (decisión deliberada del owner, 2026-08-18) |
 | Rol | Repositorio de trabajo interno |
 
 ## Flujo conceptual
