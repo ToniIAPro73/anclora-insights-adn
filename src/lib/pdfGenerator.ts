@@ -288,7 +288,7 @@ function addTextBox(doc: Pdf, value: string, x: number, y: number, width: number
 
 /* ── Estructura común ──────────────────────────────────────── */
 
-function addRunningHeader(doc: Pdf, section: string, page: number) {
+function addRunningHeader(doc: Pdf, section: string, _page: number) {
   hairline(doc, M, 16.5, PAGE_W - M, colors.line, 0.2);
 
   sans(doc, "bold");
