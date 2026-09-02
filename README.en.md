@@ -2,11 +2,11 @@
 
 <div align="center">
 
-<img src="./assets/anclora-insights-medalla-inverso-transparente.png" alt="Anclora Insights Adn" width="120" />
+<img src="./assets/anclora-insights-medalla-inverso-transparente.png" alt="Anclora Insights ADN" width="120" />
 
-# Anclora Insights Adn
+# Anclora Insights ADN — Brand Portal
 
-### Sello Editorial de Alta Autoridad | Transformando el conocimiento en
+### Brand book, business DNA and AI editorial suite for Anclora Group's editorial imprint
 
 [Español](./README.md) · **English**
 
@@ -24,28 +24,17 @@
 > Internal Anclora ecosystem repository. Do not publish operational details, credentials,
 > real data or sensitive logic outside approved channels.
 
-## At a glance
+## What this is
 
-| Area | Definition |
-| --- | --- |
-| Purpose | Sello Editorial de Alta Autoridad\|Transformando el conocimiento en |
-| Family | `internal` |
-| Visibility | `public` (deliberate owner decision, 2026-08-18) |
-| Role | Internal working repository |
+This repository is the **internal brand and editorial-assistance portal** for Anclora Insights ADN — Anclora Group's editorial imprint dedicated to research, analysis and applied knowledge creation. It is not the imprint itself, but the tool that documents its brand identity and gives AI-assisted support to the people producing its content.
 
-## Conceptual workflow
+## Main features
 
-```text
-Internal context
-      ↓
-Controlled configuration and data
-      ↓
-Product logic
-      ↓
-Technical review
-      ↓
-Delivery or operational support
-```
+- **Brand book**: navigable brand manual (voice, tone, palette, typography, correct and incorrect usage).
+- **Business DNA**: positioning and editorial-criteria document for the imprint.
+- **AI editorial assistant**: text rewriting, content generation and book/chapter summarization, powered by the Gemini API.
+- **Contrast checker**: color accessibility verification against the brand palette.
+- **Printable brand guidelines**: export the brand guidelines to PDF.
 
 ## Local start
 
@@ -54,24 +43,26 @@ npm install
 npm run dev
 ```
 
+Requires a Gemini API key configured as an environment variable for the editorial assistant (see `.env.example` if present, or the server configuration in `server.ts`).
+
 ## Technology
 
 | Area | Detail |
 | --- | --- |
-| React | Detected in repository |
-| TypeScript | Detected in repository |
-| Tailwind CSS | Detected in repository |
+| Frontend | React + Vite + Tailwind CSS |
+| Backend | Express (custom server, `server.ts`) |
+| AI | Google Gemini API (`@google/genai`) |
+| Export | PDF generation (`src/lib/pdfGenerator.ts`) |
 
 ## Documentation
 
-- Technical documentation pending in `docs/`.
+- Technical documentation pending consolidation in `docs/`.
 
 ## Governance
 
 - Canonical product: `anclora-insights-adn`
-- Vault: `/mnt/c/Users/antonio.ballesterosa/Desktop/Proyectos/Boveda-Anclora`
 - Contracts: `contracts/` and `docs/governance/`
-- Brand asset: `present`
+- Brand asset: `present` (`assets/`)
 
 ---
 
