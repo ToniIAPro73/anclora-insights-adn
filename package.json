@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "predev": "node scripts/free-port.mjs \"${PORT:-3000}\"",
-    "dev": "node ../anclora-infrastructure/scripts/free-port.mjs && tsx server.ts",
+    "dev": "node -e \"const p='../anclora-infrastructure/scripts/free-port.mjs';if(require('fs').existsSync(p)){try{require('child_process').execFileSync(process.execPath,[p],{stdio:'inherit'})}catch(e){process.exit(e.status||1)}}\" && tsx server.ts",
     "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "start": "node dist/server.cjs",
     "clean": "rm -rf dist server.js",
